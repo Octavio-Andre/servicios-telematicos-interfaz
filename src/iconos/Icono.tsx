@@ -7,7 +7,6 @@ const TRAZOS = {
   izquierda: "M15 18l-6-6 6-6",
   derecha: "M9 18l6-6-6-6",
   cerrar: "M6 6l12 12M18 6L6 18",
-  tablero: "M4 5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM10.5 5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1zM17 5a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1z",
 } as const;
 
 export type NombreIcono = keyof typeof TRAZOS;

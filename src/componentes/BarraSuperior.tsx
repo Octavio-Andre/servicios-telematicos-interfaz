@@ -13,13 +13,8 @@ export function BarraSuperior({ usuario, alCambiarUsuario, alAbrirConfiguracion 
     <header className={estilos.barra}>
       <div className={estilos.contenido}>
         <div className={estilos.marca}>
-          <span className={estilos.logo}>
-            <Icono nombre="tablero" tamano="1.25rem" />
-          </span>
-          <div className={estilos.textoMarca}>
-            <h1 className={estilos.titulo}>Tablero colaborativo</h1>
-            <p className={estilos.subtitulo}>Arquitecturas distribuidas · Grupo 10</p>
-          </div>
+          <h1 className={estilos.titulo}>Tablero colaborativo</h1>
+          <p className={estilos.subtitulo}>Arquitecturas distribuidas · Grupo 10</p>
         </div>
 
         <div className={estilos.herramientas}>

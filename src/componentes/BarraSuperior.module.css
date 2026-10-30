@@ -19,24 +19,6 @@
 }
 
 .marca {
-  display: flex;
-  align-items: center;
-  gap: var(--espacio-3);
-  min-width: 0;
-}
-
-.logo {
-  display: grid;
-  flex-shrink: 0;
-  place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: var(--radio-medio);
-  background: var(--color-acento);
-  color: #fff;
-}
-
-.textoMarca {
   min-width: 0;
 }
 
