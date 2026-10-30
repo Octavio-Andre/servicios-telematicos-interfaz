@@ -1,0 +1,10 @@
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  align-items: start;
+  gap: var(--espacio-4);
+}
+
+.tablero[aria-busy="true"] {
+  opacity: 0.6;
+}

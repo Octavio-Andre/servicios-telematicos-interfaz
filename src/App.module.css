@@ -1,0 +1,14 @@
+.principal {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--espacio-5);
+  width: min(100% - 2 * var(--espacio-5), var(--ancho-maximo));
+  margin-inline: auto;
+  padding-block: var(--espacio-5) var(--espacio-6);
+}
+
+.estado {
+  padding: var(--espacio-6) 0;
+  text-align: center;
+  color: var(--color-texto-suave);
+}

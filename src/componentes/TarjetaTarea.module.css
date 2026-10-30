@@ -1,0 +1,149 @@
+.tarjeta {
+  position: relative;
+  display: grid;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-medio);
+  background: var(--color-superficie);
+  box-shadow: var(--sombra-suave);
+  transition: border-color var(--transicion), box-shadow var(--transicion), opacity var(--transicion);
+}
+
+.tarjeta:hover,
+.tarjeta:focus-within {
+  border-color: var(--color-borde-fuerte);
+}
+
+.arrastrando {
+  opacity: 0.35;
+}
+
+.zonaArrastre {
+  display: grid;
+  gap: var(--espacio-2);
+  padding: var(--espacio-3) var(--espacio-4) var(--espacio-2);
+  cursor: grab;
+  touch-action: manipulation;
+  border-radius: var(--radio-medio) var(--radio-medio) 0 0;
+}
+
+.zonaArrastre:active {
+  cursor: grabbing;
+}
+
+.titulo {
+  font-size: var(--texto-base);
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.descripcion {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: var(--texto-pequeno);
+  color: var(--color-texto-suave);
+  overflow-wrap: anywhere;
+}
+
+.pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-1) var(--espacio-2);
+  font-size: var(--texto-pequeno);
+  color: var(--color-texto-tenue);
+}
+
+.autor {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  min-width: 0;
+}
+
+.avatar {
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: 50%;
+  background: var(--color-acento-suave);
+  color: var(--color-acento);
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.nombreAutor {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.version {
+  padding: 0 var(--espacio-2);
+  border-radius: 999px;
+  background: var(--color-superficie-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-1);
+  padding: 0 var(--espacio-2) var(--espacio-2);
+}
+
+.separador {
+  flex: 1;
+}
+
+@media (hover: hover) {
+  .zonaArrastre {
+    padding-bottom: var(--espacio-3);
+  }
+
+  .acciones {
+    position: absolute;
+    top: var(--espacio-2);
+    right: var(--espacio-2);
+    padding: 0.125rem;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-pequeno);
+    background: var(--color-superficie);
+    box-shadow: var(--sombra-suave);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transicion);
+  }
+
+  .tarjeta:hover .acciones,
+  .tarjeta:focus-within .acciones {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .separador {
+    display: none;
+  }
+}
+
+.eliminar:hover {
+  background: var(--color-peligro-suave);
+  color: var(--color-peligro);
+}
+
+.superpuesta {
+  cursor: grabbing;
+  box-shadow: var(--sombra-elevada);
+  transform: rotate(1.5deg);
+}

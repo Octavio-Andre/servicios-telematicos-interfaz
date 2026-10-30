@@ -1,0 +1,17 @@
+.espacio {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: var(--espacio-5);
+}
+
+@media (min-width: 72em) {
+  .espacio {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 20rem);
+  }
+
+  .espacio > aside {
+    position: sticky;
+    top: 5.5rem;
+  }
+}

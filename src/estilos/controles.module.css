@@ -1,0 +1,93 @@
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-2);
+  min-height: var(--altura-control);
+  padding-inline: var(--espacio-4);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+  font-weight: 500;
+  transition: background var(--transicion), border-color var(--transicion), color var(--transicion);
+}
+
+.boton:hover {
+  background: var(--color-superficie-suave);
+}
+
+.primario {
+  border-color: transparent;
+  background: var(--color-acento);
+  color: #fff;
+}
+
+.primario:hover {
+  background: var(--color-acento-fuerte);
+}
+
+.peligro {
+  border-color: transparent;
+  background: var(--color-peligro);
+  color: #fff;
+}
+
+.peligro:hover {
+  background: var(--color-peligro);
+  filter: brightness(0.92);
+}
+
+.icono {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radio-pequeno);
+  background: transparent;
+  color: var(--color-texto-suave);
+  transition: background var(--transicion), color var(--transicion);
+}
+
+.icono:hover {
+  background: var(--color-superficie-suave);
+  color: var(--color-texto);
+}
+
+.icono:disabled {
+  opacity: 0.35;
+  cursor: default;
+  background: transparent;
+}
+
+.campo {
+  display: grid;
+  gap: var(--espacio-1);
+  font-size: var(--texto-pequeno);
+  font-weight: 500;
+  color: var(--color-texto-suave);
+}
+
+.entrada {
+  width: 100%;
+  min-height: var(--altura-control);
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px solid var(--color-borde-fuerte);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+  font-size: var(--texto-base);
+  color: var(--color-texto);
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+.entrada:focus {
+  outline: none;
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px var(--color-acento-suave);
+}
+
+textarea.entrada {
+  resize: vertical;
+  min-height: 6rem;
+}
