@@ -16,6 +16,7 @@ export function App() {
   const [configuracionAbierta, setConfiguracionAbierta] = useState(false);
 
   const mostrarError = useCallback((mensaje: string) => mostrar("error", mensaje), [mostrar]);
+  const mostrarConfirmacion = useCallback((mensaje: string) => mostrar("exito", mensaje), [mostrar]);
   const arquitecturas = configuracion?.arquitecturas ?? [];
   const arquitectura = arquitecturas.find((candidata) => candidata.id === idSeleccionado) ?? arquitecturas[0];
 
@@ -43,6 +44,7 @@ export function App() {
             usuario={usuario.trim() || "Invitado"}
             alSeleccionarArquitectura={setIdSeleccionado}
             alFallar={mostrarError}
+            alConfirmar={mostrarConfirmacion}
           />
         )}
       </main>

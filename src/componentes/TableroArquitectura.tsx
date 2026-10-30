@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Arquitectura, Configuracion } from "../configuracion/configuracion";
-import type { DatosTarea, Tarea } from "../dominio/tarea";
+import { nombreDeEstado, type DatosTarea, type EstadoTarea, type Tarea } from "../dominio/tarea";
 import { useTablero } from "../estado/useTablero";
 import { DialogoConfirmacion } from "./DialogoConfirmacion";
 import { DialogoTarea, type EdicionTarea } from "./DialogoTarea";
@@ -14,15 +14,32 @@ interface PropiedadesTableroArquitectura {
   configuracion: Configuracion;
   usuario: string;
   alFallar: (mensaje: string) => void;
+  alConfirmar: (mensaje: string) => void;
 }
 
-export function TableroArquitectura({ arquitectura, configuracion, usuario, alFallar }: PropiedadesTableroArquitectura) {
+export function TableroArquitectura({
+  arquitectura,
+  configuracion,
+  usuario,
+  alFallar,
+  alConfirmar,
+}: PropiedadesTableroArquitectura) {
   const tablero = useTablero({ arquitectura, configuracion, usuario, alFallar });
   const [edicion, setEdicion] = useState<EdicionTarea | null>(null);
   const [tareaPorEliminar, setTareaPorEliminar] = useState<Tarea | null>(null);
 
-  const guardar = (datos: DatosTarea) =>
-    edicion?.modo === "editar" ? tablero.editarTarea(edicion.tarea.id, datos) : tablero.crearTarea(datos);
+  const guardar = async (datos: DatosTarea) => {
+    if (edicion?.modo === "editar") {
+      return tablero.editarTarea(edicion.tarea.id, datos);
+    }
+    const creada = await tablero.crearTarea(datos);
+    if (creada) {
+      alConfirmar(`«${datos.titulo}» se creó en ${nombreDeEstado(datos.estado)}`);
+    }
+    return creada;
+  };
+
+  const abrirCreacion = (estadoInicial: EstadoTarea = "pendiente") => setEdicion({ modo: "crear", estadoInicial });
 
   return (
     <>
@@ -32,13 +49,14 @@ export function TableroArquitectura({ arquitectura, configuracion, usuario, alFa
         intervaloConsultaMs={configuracion.intervaloConsultaMs}
         ultimaOperacion={tablero.ultimaOperacion}
         totalTareas={tablero.tareas.length}
+        alCrearTarea={() => abrirCreacion()}
       />
 
       <div className={estilos.espacio}>
         <Tablero
           tareas={tablero.tareas}
           cargando={!tablero.sincronizado}
-          alAgregar={(estadoInicial) => setEdicion({ modo: "crear", estadoInicial })}
+          alAgregar={abrirCreacion}
           alEditar={(tarea) => setEdicion({ modo: "editar", tarea })}
           alEliminar={setTareaPorEliminar}
           alMover={(tarea, estado) => void tablero.moverTarea(tarea, estado)}

@@ -9,6 +9,7 @@ interface PropiedadesEspacio {
   usuario: string;
   alSeleccionarArquitectura: (id: string) => void;
   alFallar: (mensaje: string) => void;
+  alConfirmar: (mensaje: string) => void;
 }
 
 function claveDeConexion(arquitectura: Arquitectura): string {
@@ -21,6 +22,7 @@ export function EspacioTrabajo({
   usuario,
   alSeleccionarArquitectura,
   alFallar,
+  alConfirmar,
 }: PropiedadesEspacio) {
   const salud = useSaludServicios(configuracion.arquitecturas, configuracion.intervaloSaludMs, configuracion.tiempoMaximoMs);
 
@@ -38,6 +40,7 @@ export function EspacioTrabajo({
         configuracion={configuracion}
         usuario={usuario}
         alFallar={alFallar}
+        alConfirmar={alConfirmar}
       />
     </>
   );

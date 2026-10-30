@@ -21,6 +21,10 @@
   font-size: var(--texto-pequeno);
 }
 
+.crear {
+  flex: 0 0 auto;
+}
+
 .datos {
   display: flex;
   flex-wrap: wrap;

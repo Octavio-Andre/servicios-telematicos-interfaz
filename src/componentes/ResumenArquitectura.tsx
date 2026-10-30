@@ -2,6 +2,8 @@ import type { Arquitectura } from "../configuracion/configuracion";
 import { formatearDuracion } from "../estado/formatos";
 import type { UltimaOperacion } from "../estado/useTablero";
 import type { EstadoConexion } from "../proveedores/socketReconectable";
+import controles from "../estilos/controles.module.css";
+import { Icono } from "../iconos/Icono";
 import estilos from "./ResumenArquitectura.module.css";
 
 interface PropiedadesResumen {
@@ -10,6 +12,7 @@ interface PropiedadesResumen {
   intervaloConsultaMs: number;
   ultimaOperacion: UltimaOperacion | null;
   totalTareas: number;
+  alCrearTarea: () => void;
 }
 
 function describirConexion(arquitectura: Arquitectura, estado: EstadoConexion, intervaloMs: number): string {
@@ -31,6 +34,7 @@ export function ResumenArquitectura({
   intervaloConsultaMs,
   ultimaOperacion,
   totalTareas,
+  alCrearTarea,
 }: PropiedadesResumen) {
   return (
     <section className={estilos.resumen} aria-label="Resumen de la arquitectura">
@@ -51,6 +55,11 @@ export function ResumenArquitectura({
         )}
         <li className={estilos.dato}>{totalTareas === 1 ? "1 tarea" : `${totalTareas} tareas`}</li>
       </ul>
+
+      <button type="button" className={`${controles.boton} ${controles.primario} ${estilos.crear}`} onClick={alCrearTarea}>
+        <Icono nombre="agregar" />
+        Crear tarea
+      </button>
     </section>
   );
 }
