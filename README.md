@@ -22,7 +22,7 @@ Un mismo tablero de tareas (Pendiente · En progreso · Finalizada) que se conec
 ## Requisitos
 
 - Node.js 22.12 o superior (probado también con Node.js 26).
-- Los prototipos en ejecución, en sus ramas con CORS habilitado (`sprint4-interfaz-grafica`).
+- Los prototipos en ejecución desde su rama `main` (incluye CORS en Cliente-Servidor, en los nodos P2P y en el API Gateway).
 
 ## Ejecución en desarrollo
 
@@ -58,7 +58,33 @@ docker run --rm -p 8080:80 -v ./config.json:/usr/share/nginx/html/config.json:ro
 
 También se pueden cambiar desde el botón de ajustes de la interfaz; el cambio se guarda solo en ese navegador.
 
-> En `docker-compose.yml` del repositorio de microservicios el API Gateway se publica en el puerto `6000`. Si se usa esa composición, cambiar la dirección de Microservicios a `http://localhost:6000`.
+> El API Gateway se publica en el puerto `6001`, tanto en `docker-compose.yml` como en las VMs.
+
+## Uso con las máquinas virtuales
+
+`config.vm.json` contiene las direcciones del entorno virtualizado (red Host-Only):
+
+| Arquitectura | API | Tiempo real |
+|---|---|---|
+| Cliente-Servidor | `http://192.168.56.11:3000` | `ws://192.168.56.11:3000/ws` |
+| P2P · Nodo 1 | `http://192.168.56.11:4001` | consulta periódica |
+| P2P · Nodo 2 | `http://192.168.56.12:4002` | consulta periódica |
+| Microservicios | `http://192.168.56.12:6001` (Gateway) | `ws://192.168.56.12:5002/ws` |
+
+Tres formas de usarlo:
+
+```powershell
+# 1) Desarrollo en el equipo anfitrión: usar config.vm.json sin modificar public/config.json
+Copy-Item config.vm.json public\config.json; npm run dev     # luego: git checkout public/config.json
+
+# 2) Docker (en el anfitrión o en una VM): montar el archivo
+docker run -d --name tele-interfaz -p 8080:80 -v ${PWD}/config.vm.json:/usr/share/nginx/html/config.json:ro tele-interfaz
+
+# 3) Sin archivos: escribir las direcciones desde el botón de ajustes de la interfaz
+```
+
+El navegador se conecta directamente a las VMs, por lo que el equipo donde se abre la interfaz debe alcanzar
+la red `192.168.56.0/24`.
 
 ## Estructura
 

@@ -1,0 +1,45 @@
+{
+  "arquitecturas": [
+    {
+      "id": "cliente-servidor",
+      "nombre": "Cliente-Servidor",
+      "descripcion": "Un servidor central atiende a todos los clientes y difunde los cambios por WebSocket.",
+      "urlApi": "http://192.168.56.11:3000",
+      "rutaTareas": "/tasks",
+      "rutaSalud": "/",
+      "tiempoReal": "websocket",
+      "urlWebSocket": "ws://192.168.56.11:3000/ws"
+    },
+    {
+      "id": "p2p-nodo-1",
+      "nombre": "P2P · Nodo 1",
+      "descripcion": "Cada nodo guarda sus tareas y las propaga directamente a sus pares.",
+      "urlApi": "http://192.168.56.11:4001",
+      "rutaTareas": "/tasks",
+      "rutaSalud": "/",
+      "tiempoReal": "consulta"
+    },
+    {
+      "id": "p2p-nodo-2",
+      "nombre": "P2P · Nodo 2",
+      "descripcion": "Cada nodo guarda sus tareas y las propaga directamente a sus pares.",
+      "urlApi": "http://192.168.56.12:4002",
+      "rutaTareas": "/tasks",
+      "rutaSalud": "/",
+      "tiempoReal": "consulta"
+    },
+    {
+      "id": "microservicios",
+      "nombre": "Microservicios",
+      "descripcion": "El API Gateway enruta al servicio de tareas y el servicio de notificaciones difunde los cambios.",
+      "urlApi": "http://192.168.56.12:6001",
+      "rutaTareas": "/api/tareas",
+      "rutaSalud": "/health",
+      "tiempoReal": "websocket",
+      "urlWebSocket": "ws://192.168.56.12:5002/ws"
+    }
+  ],
+  "intervaloConsultaMs": 1500,
+  "intervaloSaludMs": 5000,
+  "tiempoMaximoMs": 5000
+}
